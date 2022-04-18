@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Cryptocurrency</title>
+        <style type="text/css">
+h1 { text-align: center; font-size:35px;} 
+</style>
+    </head>
+    <body style="background-color:gainsboro;">
+        <h1>Add Cryptocurrency<br></h1>
+        <form>
+            <!-- FIX BACK BUTTON TO GO TO HOMEPAGE -->
+            <input type="button" value="Homepage" onclick="history.back()">
+            <!-- Clear iput -->
+            <button onclick="document.getElementById('cryptoName').value = ''">Clear input field</button><br>
+            <!-- Input from user -->
+            <label for="cryptoID">Cryptocurrency ID:</label><br>
+            <input type="text" id="cryptoID" name="cryptoID"><br>
+            <label for="cryptoName">Cryptocurrency Name:</label><br>
+            <input type="text" id="cryptoName" name="cryptoName"><br>
+            <label for="cryptoValue">Cryptocurrency Current Value:</label><br>
+            <input type="text" id="cryptoValue" name="cryptoValue"><br>
+
+           </form>
+    </body>
+    </html>
