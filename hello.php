@@ -1,4 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Enter name</title>
+</head>
 <body>
 <h3>Enter your name:</h3>
 
