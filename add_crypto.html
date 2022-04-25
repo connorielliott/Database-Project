@@ -7,31 +7,35 @@
 				text-align: center;
 				font-size: 35px;
 			}
+			h2 {
+				text-align: left;
+				font-size: 25px;
+			}
 		</style>
 	</head>
 	<body style="background-color: gainsboro">
 		<h1>Add Cryptocurrency<br /></h1>
-		<form>
-			<!-- GO TO HOMEPAGE -->
-			<a href="homepage.html"> Homepage</a>
-
-			<!-- Clear input -->
+		<h2>
+			<form>
+				<!-- GO TO HOMEPAGE -->
+				<input type=button onClick="location.href='homepage.html'"
+					value='Homepage'> <br />
+				<!-- Clear input
 			<button onclick="document.getElementById('cryptoName').value= ''">
-				Clear input field</button><br />
-			<!-- Input from user -->
-			<br><label style="color: black;font-weight: 600;"
-				for="cryptoID">Cryptocurrency ID:</label>
-			<input type="text" id="cryptoID" name="cryptoID" /><br />
+				Clear input field</button><br /> -->
+				<!-- Input from user -->
+				<br><label style="color: black;font-weight: 600;"
+					for="cryptoID">Cryptocurrency ID:</label>
+				<input type="text" id="cryptoID" name="cryptoID" /><br />
 
-			<br><label style="color: black;font-weight: 600;"
-				for="cryptoName">Cryptocurrency Name:</label>
-			<input type="text" id="cryptoName" name="cryptoName" /><br />
+				<br><label style="color: black;font-weight: 600;"
+					for="cryptoName">Cryptocurrency Name:</label>
+				<input type="text" id="cryptoName" name="cryptoName" /><br />
 
-			<br><label style="color: black;font-weight: 600;"
-				for="cryptoValue">Cryptocurrency Current Value:</label>
-			<input type="text" id="cryptoValue" name="cryptoValue" /><br />
-		</form>
+				<br><label style="color: black;font-weight: 600;"
+					for="cryptoValue">Cryptocurrency Current Value:</label>
+				<input type="text" id="cryptoValue" name="cryptoValue" /><br />
+			</form>
+		</h2>
 	</body>
 </html>
-<?php
-	?>
