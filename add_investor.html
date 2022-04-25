@@ -7,10 +7,15 @@
 				text-align: center;
 				font-size: 35px;
 			}
+			h2 {
+				text-align: left;
+				font-size: 25px;
+			}
 		</style>
 	</head>
 	<body style="background-color: gainsboro">
 		<h1>Add Investor <br /></h1>
+<<<<<<< HEAD
 		<form>
 			<!-- FIX BACK BUTTON TO GO TO HOMEPAGE -->
 			<input type="button" value="Homepage" onclick="history.back()" />
@@ -30,3 +35,33 @@
 		</form>
 	</body>
 </html>
+=======
+		<h2>
+			<form>
+				<!-- GO TO HOMEPAGE -->
+				<input type=button onClick="location.href='homepage.html'"
+					value='Homepage'> <br />
+				<!-- Clear input
+			<button onclick="document.getElementById('fname').value= ''">
+				Clear input field</button><br /> -->
+				<!-- Input from user -->
+				<br><label style="color: black;font-weight: 600;"
+					for="fname">First name:</label>
+				<input type="text" id="fname" name="fname" /><br />
+
+				<br><label style="color: black;font-weight: 600;"
+					for="lname">Last name:</label>
+				<input type="text" id="lname" name="lname" /><br />
+
+				<br><label style="color: black;font-weight: 600;"
+					for="investorID">Investor ID:</label>
+				<input type="text" id="investorID" name="investorID" /><br />
+
+				<br><label style="color: black;font-weight: 600;"
+					for="investorEmail">Investor Email:</label>
+				<input type="text" id="investorEmail" name="investorEmail" /><br />
+			</form>
+		</h2>
+	</body>
+</html>
+>>>>>>> 0cea2ff (More cosmetics)
