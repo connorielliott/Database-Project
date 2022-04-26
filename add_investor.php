@@ -20,17 +20,10 @@
 				<!-- GO TO HOMEPAGE -->
 				<input type=button onClick="location.href='homepage.html'"
 					value='Homepage'> <br />
-				<!-- Clear input
-			<button onclick="document.getElementById('fname').value= ''">
-				Clear input field</button><br /> -->
 				<!-- Input from user -->
 				<br><label style="color: black;font-weight: 600;"
-					for="fname">First name:</label>
-				<input type="text" id="fname" name="fname" /><br />
-
-				<br><label style="color: black;font-weight: 600;"
-					for="lname">Last name:</label>
-				<input type="text" id="lname" name="lname" /><br />
+					for="name">Name:</label>
+				<input type="text" id="name" name="name" /><br />
 
 				<br><label style="color: black;font-weight: 600;"
 					for="investorID">Investor ID:</label>
@@ -39,7 +32,28 @@
 				<br><label style="color: black;font-weight: 600;"
 					for="investorEmail">Investor Email:</label>
 				<input type="text" id="investorEmail" name="investorEmail" /><br />
+
+				<!-- Submit -->
+				<input name="submit" type="submit" >
 			</form>
 		</h2>
 	</body>
 </html>
+
+<?php
+if (isset($_POST['submit'])) 
+{
+    // replace ' ' with '\ ' in the strings so they are treated as single command line args
+    $name = escapeshellarg($_POST[name]);
+	$investorID = escapeshellarg($_POST[investorID]);
+	$investorEmail = escapeshellarg($_POST[investorEmail]);
+
+    $command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $name . ' ' . $investorID. ' ' . $investorEmail;
+
+    // remove dangerous characters from command to protect web server
+    $escaped_command = escapeshellcmd($command);
+    echo "<p>command: $command <p>"; 
+    // run jdbc_insert_item.exe
+    system($escaped_command);           
+}
+?>

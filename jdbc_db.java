@@ -104,7 +104,7 @@ public class jdbc_db {
 
    // Insert into any table, any values from data passed in as String parameters
    public void insert(String table, String values) {
-      String query = "INSERT into " + table + " values (" + values + ")";
+      String query = "INSERT into " + table + " VALUES" + values + ")";
 
       try {
          statement.executeUpdate(query);
