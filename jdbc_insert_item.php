@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <body>
 <h3>Enter information about an item to add to the database:</h3>
 
