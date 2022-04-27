@@ -19,7 +19,7 @@
 <body style="background-color: gainsboro">
 	<h1>Add Investor <br /></h1>
 	<h2>
-		<form method="post">
+		<form action="jdbc_insert_item.php" method="post">
 			<!-- GO TO HOMEPAGE -->
 			<input type=button onClick="location.href='homepage.html'" value='Homepage'> <br />
 			<!-- Input from user -->
@@ -50,18 +50,16 @@ if (isset($_POST['submit'])) {
 	 $investorEmail = escapeshellarg($_POST['investorEmail']);
 
 	 echo "<h2>Your Input:</h2>";
-	 echo "Name: ", $name;
-	 echo "<br>";
-	 echo "Investor ID: ",$investorID;
-	 echo "<br>";
+	 echo "Name: ", $name, "<br />";
+	 echo "Investor ID: ",$investorID, "<br />";
 	 echo "Investor Email: ",$investorEmail;
 
-	//$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $name . ' ' . $investorID. ' ' . $investorEmail;
+	$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar Main addInvestor '. $name . ' ' . $investorID. ' ' . $investorEmail;
 
 	//remove dangerous characters from command to protect web server
-	// $escaped_command = escapeshellcmd($command);
-	// echo "<p>command: $command <p>"; 
-	// // run jdbc_insert_item.exe
-	// system($escaped_command);           
+	 $escaped_command = escapeshellcmd($command);
+	 //echo "<p>command: $command <p>"; 
+	 // run jdbc_insert_item.exe
+	 system($escaped_command);           
 }
 ?>

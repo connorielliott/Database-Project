@@ -48,6 +48,24 @@ if (isset($_POST['submit']))
     // $escaped_command = escapeshellcmd($command);
     // echo "<p>command: $command <p>"; 
     // // run jdbc_insert_item.exe
-    // system($escaped_command);           
+    // system($escaped_command);  
+	
+
+	// basic select statement to get the data from the database
+	//NOT DONE
+	$query = "SELECT * FROM Investor";
+	echo "<b> <center>Database Output</center> </b> <br> <br>";
+
+	if ($result = $mysqli->query($query)) {
+    while ($row = $result->fetch_assoc()) {
+        $investorID = $row["col1"];
+        $name = $row["col2"];
+		$investorEmail = $row["col3"];
+        echo $investorID.'<b>'; 
+		echo $name.'</b>'; 
+        echo $investorEmail;
+    }
+	$result->free();
+}
 }
 ?>
