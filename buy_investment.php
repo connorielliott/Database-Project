@@ -16,7 +16,7 @@
 	<body style="background-color: gainsboro">
 		<h1>Buy Investments <br /></h1>
 		<h2>
-		<form method="post">
+		<form action="jdbc_insert_item.php" method="post">
 				<!-- GO TO HOMEPAGE -->
 				<input type=button onClick="location.href='homepage.html'"
 					value='Homepage'> <br />
