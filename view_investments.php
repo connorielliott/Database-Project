@@ -16,7 +16,7 @@
 	<body style="background-color: gainsboro">
 		<h1>View Investments<br /></h1>
 		<h2>
-			<form>
+		<form method="post">
 				<!-- GO TO HOMEPAGE -->
 				<input type=button onClick="location.href='homepage.html'"
 					value='Homepage'> <br />
@@ -30,24 +30,32 @@
 				<input type="text" id="name" name="name" /><br />
 		
 				<!-- Submit -->
-				<input name="submit" type="submit" >
+				<input type="submit" name="submit" value="submit">
 			</form>
 		</h2>
 	</body>
 </html>
 <?php
+$investorID = $name = "";
 if (isset($_POST['submit'])) 
 {
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
-	$investorID = escapeshellarg($_POST[investorID]);
-	$name = escapeshellarg($_POST[name]);
+	$investorID = escapeshellarg($_POST['investorID']);
+	$name = escapeshellarg($_POST['name']);
 
-    $command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $investorID . ' ' . $name;
+	echo "<h2>Your Input:</h2>";
+	echo "Investor ID: ",$investorID;
+	echo "<br>";
+	echo "Name: ", $name;
+	echo "<br>";
+	 
+
+    //$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $investorID . ' ' . $name;
 
     // remove dangerous characters from command to protect web server
-    $escaped_command = escapeshellcmd($command);
-    echo "<p>command: $command <p>"; 
-    // run jdbc_insert_item.exe
-    system($escaped_command);           
+    // $escaped_command = escapeshellcmd($command);
+    // echo "<p>command: $command <p>"; 
+    // // run jdbc_insert_item.exe
+    // system($escaped_command);           
 }
 ?>

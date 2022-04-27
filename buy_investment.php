@@ -16,7 +16,7 @@
 	<body style="background-color: gainsboro">
 		<h1>Buy Investments <br /></h1>
 		<h2>
-		<form>
+		<form method="post">
 				<!-- GO TO HOMEPAGE -->
 				<input type=button onClick="location.href='homepage.html'"
 					value='Homepage'> <br />
@@ -41,27 +41,35 @@
 					for="stillOwned"> Still Owned:</label>
 				<input type="text" id="stillOwned" name="stillOwned" /><br />
 			<!-- Submit -->
-			<input name="submit" type="submit" >
+			<input type="submit" name="submit" value="submit">
 		</form>
 		</h2>
 	</body>
 </html>
 <?php
+$investorID = $cryptoID = $numShares = $purchasePrice = $stillOwned = "";
 if (isset($_POST['submit'])) 
 {
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
-	$investorID = escapeshellarg($_POST[investorID]);
-	$cryptoID = escapeshellarg($_POST[cryptoID]);
-	$numShares = escapeshellarg($_POST[numShares]);
-	$purchasePrice = escapeshellarg($_POST[purchasePrice]);
-	$stillOwned = escapeshellarg($_POST[stillOwned]);
+	$investorID = escapeshellarg($_POST['investorID']);
+	$cryptoID = escapeshellarg($_POST['cryptoID']);
+	$numShares = escapeshellarg($_POST['numShares']);
+	$purchasePrice = escapeshellarg($_POST['purchasePrice']);
+	$stillOwned = escapeshellarg($_POST['stillOwned']);
 
-    $command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $investorID . ' ' . $cryptoID . ' ' . $numShares. ' ' . $purchasePrice. '' . $stillOwned;
+	echo "<h2>Your Input:</h2>";
+	echo "Investor ID: " . $investorID . "<br />";
+	echo "Cryptocurrency ID: " . $cryptoID . "<br />";
+	echo "Number of Shares: " . $numShares . "<br />";
+	echo "Purchase Price: " . $purchasePrice . "<br />";
+	echo "Still Owned: " . $stillOwned . "<br />";
+
+    //$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $investorID . ' ' . $cryptoID . ' ' . $numShares. ' ' . $purchasePrice. '' . $stillOwned;
 
     // remove dangerous characters from command to protect web server
-    $escaped_command = escapeshellcmd($command);
-    echo "<p>command: $command <p>"; 
-    // run jdbc_insert_item.exe
-    system($escaped_command);           
+    // $escaped_command = escapeshellcmd($command);
+    // echo "<p>command: $command <p>"; 
+    // // run jdbc_insert_item.exe
+    // system($escaped_command);           
 }
 ?>
