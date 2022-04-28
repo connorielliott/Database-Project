@@ -33,9 +33,6 @@
 					for="numShares">Number of Shares:</label>
 				<input type="text" id="numShares" name="numShares" /><br />
 
-				<br><label style="color: black;font-weight: 600;"
-					for="purchasePrice">Purchase Price:</label>
-				<input type="text" id="purchasePrice" name="purchasePrice" /><br /><br>
 				<!-- Submit -->
 				<input type="submit" name="submit" value="submit">
 			</form>
