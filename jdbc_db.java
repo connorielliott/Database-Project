@@ -108,6 +108,11 @@ public class jdbc_db {
       statement.executeUpdate(query);
    }
 
+   // Update any table, any values from data passed in as String parameters
+   public void update(String query) throws SQLException {
+      statement.executeUpdate(query);
+   }
+
    // Remove all records and fill them with values for testing
    // Assumes that the tables are already created
    public void initDatabase() throws SQLException {

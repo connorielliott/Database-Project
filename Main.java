@@ -1,5 +1,7 @@
 import java.sql.*;
+import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class Main {
     private jdbc_db cryptoDB;
@@ -88,31 +90,44 @@ public class Main {
         String cryptoId = params[1];
         String numShares = params[2];
 
-        // get CurrentValue from Cryptocurrency table with cryptoId and save to variable
-        Float currentValue;
-        // cryptoDB.query("SELECT CurrentValue FROM Cryptocurrency WHERE
-        // CryptocurrencyId = " + cryptoId);
+        // find profit/loss
         try {
-            ResultSet rs = cryptoDB
-                    .rawQuery("SELECT CurrentValue FROM Cryptocurrency WHERE CryptocurrencyId = " + cryptoId);
+            ResultSet rs = cryptoDB.rawQuery(
+                    "SELECT c.CurrentValue, i.PurchasePrice FROM Cryptocurrency c, Investments i WHERE c.CryptocurrencyId = "
+                            + cryptoId + " AND i.InvestorId = " + investorId);
             rs.next();
-            currentValue = rs.getFloat(1);
-            System.out.println(currentValue);
+            float currentValue = rs.getFloat(1);
+            float purchasePrice = rs.getFloat(2);
+
+            // show difference between current value and purchase price and format to
+            // dollars
+            float profitLoss = (currentValue - purchasePrice) * Float.parseFloat(numShares);
+            NumberFormat.getCurrencyInstance(new Locale("en", "US")).format(profitLoss);
+
+            // print profit/loss
+            StringBuilder builder = new StringBuilder();
+            builder.append("<br> Profit/Loss: " + profitLoss + "<br>");
+            System.out.println(builder.toString());
+
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            System.err.println("Cannot get get profit/loss");
             e.printStackTrace();
+            return;
         }
 
-        // change Investments table to reflect StillOwned = false and subtract numShares
-        // from NumShares
-        // String query = "UPDATE Investments SET StillOwned = FALSE, NumShares =
-        // NumShates - " + numShares + "WHERE InvestorID = " + investorId + " AND
-        // CryptocurrencyID = " + cryptoId;
-        // cryptoDB.query(query);
+        // update number of shares in investments table
+        String query = "UPDATE Investments SET NumShares = NumShares - " + numShares
+                + " WHERE InvestorId = " + investorId + " AND CryptocurrencyId = " + cryptoId;
+        // if NumShares is 0, StillOwned = FALSE
+        String query2 = "UPDATE Investments SET StillOwned = FALSE WHERE NumShares = 0";
 
-        // // show difference between current value and purchase price
-        // StringBuilder builder = new StringBuilder();
-
+        try {
+            cryptoDB.update(query);
+            cryptoDB.update(query2);
+        } catch (SQLException e) {
+            System.err.println("Cannot update number of shares");
+            e.printStackTrace();
+        }
     }
 
     // view all investments for given investor (decending by current value)
@@ -120,12 +135,12 @@ public class Main {
         // display investments
         String investorId = params[0];
         StringBuilder builder = new StringBuilder();
-        String query = "SELECT * FROM Investments WHERE InvestorId = " + investorId + " ORDER BY CurrentValue DESC";
+        String query = "SELECT c.CryptoName, (SUM(i.NumShares) * c.CurrentValue) AS 'Total Value' FROM Investments i, Cryptocurrency c WHERE InvestorId = "
+                + investorId
+                + " AND i.CryptocurrencyId = c.CryptocurrencyId GROUP BY c.CryptoName, i.CryptocurrencyId ORDER BY (SUM(i.NumShares) * c.CurrentValue) DESC";
         builder.append("<br> Investment Table :" + cryptoDB.query(query) + "<br>");
         System.out.println(builder.toString());
-
         // need to aggregate the total investments by cryptocurrency.
-
     }
 
     // view all investors for given currency

@@ -27,17 +27,31 @@
 		},
 		{
 			"type": "java",
+			"name": "Launch add crypto",
+			"request": "launch",
+			"mainClass": "Main",
+			"args": ["addCrypto", "1", "Bitcoin", "20"]
+		},
+		{
+			"type": "java",
 			"name": "Launch sell investment",
 			"request": "launch",
 			"mainClass": "Main",
-			"args": ["sellInvestment", "1", "1", "4"]
+			"args": ["sellInvestment", "60", "1", "4"]
 		},
 		{
 			"type": "java",
 			"name": "Launch buy investment",
 			"request": "launch",
 			"mainClass": "Main",
-			"args": ["buyInvestment", "1", "1", "4", "55", "TRUE"]
+			"args": ["buyInvestment", "60", "1", "30", "55", "TRUE"]
+		},
+		{
+			"type": "java",
+			"name": "Launch view investments",
+			"request": "launch",
+			"mainClass": "Main",
+			"args": ["viewInvestments", "60"]
 		},
 
 		{
