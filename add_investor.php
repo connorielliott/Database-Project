@@ -8,7 +8,6 @@
 			text-align: center;
 			font-size: 35px;
 		}
-
 		h2 {
 			text-align: left;
 			font-size: 25px;
@@ -19,7 +18,7 @@
 <body style="background-color: gainsboro">
 	<h1>Add Investor <br /></h1>
 	<h2>
-		<form action="jdbc_insert_item.php" method="post">
+		<form method="post">
 			<!-- GO TO HOMEPAGE -->
 			<input type=button onClick="location.href='homepage.html'" value='Homepage'> <br />
 			<!-- Input from user -->
@@ -30,7 +29,7 @@
 			<input type="text" id="investorID" name="investorID" /><br />
 
 			<br><label style="color: black;font-weight: 600;" for="investorEmail">Investor Email:</label>
-			<input type="text" id="investorEmail" name="investorEmail" /><br />
+			<input type="text" id="investorEmail" name="investorEmail" /><br /><br>
 
 			<!-- Submit -->
 			<input type="submit" name="submit" value="submit">
@@ -42,24 +41,23 @@
 
 <?php
 $name = $investorID = $investorEmail = "";
-
 if (isset($_POST['submit'])) {
 	// replace ' ' with '\ ' in the strings so they are treated as single command line args
-	 $name = escapeshellarg($_POST['name']);
-	 $investorID = escapeshellarg($_POST['investorID']);
-	 $investorEmail = escapeshellarg($_POST['investorEmail']);
+	$investorID = escapeshellarg($_POST['investorID']);
+	$name = escapeshellarg($_POST['name']);
+	$investorEmail = escapeshellarg($_POST['investorEmail']);
+	//repeat user input 
+	echo "<h2>Your Input:</h2>";
+	echo "Investor ID: ", $investorID, "<br />";
+	echo "Name: ", $name, "<br />";
+	echo "Investor Email: ", $investorEmail, "<br />";
 
-	 echo "<h2>Your Input:</h2>";
-	 echo "Name: ", $name, "<br />";
-	 echo "Investor ID: ",$investorID, "<br />";
-	 echo "Investor Email: ",$investorEmail;
-
-	$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar Main addInvestor '. $name . ' ' . $investorID. ' ' . $investorEmail;
+	$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar Main addInvestor ' . $investorID . ' ' . $name . ' ' . $investorEmail;
 
 	//remove dangerous characters from command to protect web server
-	 $escaped_command = escapeshellcmd($command);
-	 //echo "<p>command: $command <p>"; 
-	 // run jdbc_insert_item.exe
-	 system($escaped_command);           
+	$escaped_command = escapeshellcmd($command);
+	//echo "<p>command: $command <p>"; 
+	// run jdbc_insert_item.exe
+	system($escaped_command);
 }
 ?>

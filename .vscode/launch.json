@@ -8,10 +8,9 @@
 			"name": "Launch Edge",
 			"request": "launch",
 			"type": "pwa-msedge",
-			"url": "http://localhost:3000/homepage.html",
+			"url": "http://www.csce.uark.edu/~cielliot/Database-Project/homepage.html",
 			"webRoot": "${workspaceRoot}"
 		},
-
 		{
 			"type": "java",
 			"name": "Launch with Arguments Prompt",
@@ -26,6 +25,21 @@
 			"mainClass": "Main",
 			"args": ["addInvestor", "60", "John", "john42@gmail.com"]
 		},
+		{
+			"type": "java",
+			"name": "Launch sell investment",
+			"request": "launch",
+			"mainClass": "Main",
+			"args": ["sellInvestment", "1", "1", "4"]
+		},
+		{
+			"type": "java",
+			"name": "Launch buy investment",
+			"request": "launch",
+			"mainClass": "Main",
+			"args": ["buyInvestment", "1", "1", "4", "55", "TRUE"]
+		},
+
 		{
 			"type": "java",
 			"name": "Launch Main",

@@ -16,7 +16,7 @@
 	<body style="background-color: gainsboro">
 		<h1>Buy Investments <br /></h1>
 		<h2>
-		<form action="jdbc_insert_item.php" method="post">
+		<form method="post">
 				<!-- GO TO HOMEPAGE -->
 				<input type=button onClick="location.href='homepage.html'"
 					value='Homepage'> <br />
@@ -35,11 +35,7 @@
 
 				<br><label style="color: black;font-weight: 600;"
 					for="purchasePrice">Purchase Price:</label>
-				<input type="text" id="purchasePrice" name="purchasePrice" /><br />
-
-				<br><label style="color: black;font-weight: 600;"
-					for="stillOwned"> Still Owned:</label>
-				<input type="text" id="stillOwned" name="stillOwned" /><br />
+				<input type="text" id="purchasePrice" name="purchasePrice" /><br /><br />
 			<!-- Submit -->
 			<input type="submit" name="submit" value="submit">
 		</form>
@@ -47,7 +43,7 @@
 	</body>
 </html>
 <?php
-$investorID = $cryptoID = $numShares = $purchasePrice = $stillOwned = "";
+$investorID = $cryptoID = $numShares = $purchasePrice = "";
 if (isset($_POST['submit'])) 
 {
     // replace ' ' with '\ ' in the strings so they are treated as single command line args
@@ -55,21 +51,20 @@ if (isset($_POST['submit']))
 	$cryptoID = escapeshellarg($_POST['cryptoID']);
 	$numShares = escapeshellarg($_POST['numShares']);
 	$purchasePrice = escapeshellarg($_POST['purchasePrice']);
-	$stillOwned = escapeshellarg($_POST['stillOwned']);
-
+	
+	//repeat user input 
 	echo "<h2>Your Input:</h2>";
 	echo "Investor ID: " . $investorID . "<br />";
 	echo "Cryptocurrency ID: " . $cryptoID . "<br />";
 	echo "Number of Shares: " . $numShares . "<br />";
 	echo "Purchase Price: " . $purchasePrice . "<br />";
-	echo "Still Owned: " . $stillOwned . "<br />";
 
-    //$command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar jdbc_insert_item ' . $investorID . ' ' . $cryptoID . ' ' . $numShares. ' ' . $purchasePrice. '' . $stillOwned;
+    $command = 'java -cp .:mysql-connector-java-5.1.40-bin.jar Main buyInvestment ' . $investorID . ' ' . $cryptoID . ' ' . $numShares. ' ' . $purchasePrice;
 
-    // remove dangerous characters from command to protect web server
-    // $escaped_command = escapeshellcmd($command);
-    // echo "<p>command: $command <p>"; 
-    // // run jdbc_insert_item.exe
-    // system($escaped_command);           
+    //remove dangerous characters from command to protect web server
+    $escaped_command = escapeshellcmd($command);
+    echo "<p>command: $command <p>"; 
+    // run jdbc_insert_item.exe
+    system($escaped_command);           
 }
 ?>

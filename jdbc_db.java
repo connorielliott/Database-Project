@@ -103,20 +103,14 @@ public class jdbc_db {
    }
 
    // Insert into any table, any values from data passed in as String parameters
-   public void insert(String table, String values) {
-      String query = "INSERT into " + table + " VALUES" + values + ")";
-
-      try {
-         statement.executeUpdate(query);
-      } catch (SQLException e) {
-         e.printStackTrace();
-      }
+   public void insert(String table, String values) throws SQLException {
+      String query = "INSERT into " + table + " VALUES(" + values + ")";
+      statement.executeUpdate(query);
    }
 
    // Remove all records and fill them with values for testing
    // Assumes that the tables are already created
    public void initDatabase() throws SQLException {
       statement = connection.createStatement();
-
    }
 }
