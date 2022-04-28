@@ -37,7 +37,7 @@ public class jdbc_db {
       try {
          ResultSet resultSet = statement.executeQuery(q);
          builder.append("<br>---------------------------------<br>");
-         builder.append("Query: <br>" + q + "<br><br>Result: ");
+         // builder.append("Query: <br>" + q + "<br><br>Result: ");
          builder.append(print(resultSet));
       } catch (SQLException e) {
          e.printStackTrace();

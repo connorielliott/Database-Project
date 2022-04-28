@@ -23,7 +23,7 @@
 			"name": "Launch add investor",
 			"request": "launch",
 			"mainClass": "Main",
-			"args": ["addInvestor", "60", "John", "john42@gmail.com"]
+			"args": ["addInvestor", "2", "Connor", "connor@gmail.com"]
 		},
 		{
 			"type": "java",
@@ -53,6 +53,15 @@
 			"mainClass": "Main",
 			"args": ["viewInvestments", "60"]
 		},
+		{
+		"type": "java",
+		"name": "Launch view investors",
+		"request": "launch",
+		"mainClass": "Main",
+		"args": ["viewInvestors", "1"]
+		},
+
+
 
 		{
 			"type": "java",

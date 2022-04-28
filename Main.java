@@ -70,7 +70,6 @@ public class Main {
         String numShares = params[2];
         String purchasePrice = params[3];
         String values = investorID + ", " + cryptoID + ", " + numShares + ", " + purchasePrice + "," + "TRUE";
-        System.out.println(values);
         try {
             cryptoDB.insert("Investments", values);
         } catch (SQLException e) {
@@ -79,7 +78,9 @@ public class Main {
 
         // show Investments table
         StringBuilder builder = new StringBuilder();
-        builder.append("<br> Table Investments after:" + cryptoDB.query("SELECT * from Investments") + "<br>");
+        builder.append("<br> Table Investments after:" + cryptoDB.query(
+                "SELECT iv.Name, c.CryptoName, i.NumShares, i.PurchasePrice from Investments i, Investor iv, Cryptocurrency c WHERE i.InvestorID = iv.InvestorId AND i.CryptocurrencyId = c.CryptocurrencyID")
+                + "<br>");
         System.out.println(builder.toString());
     }
 
@@ -149,7 +150,9 @@ public class Main {
         String cryptoID = params[0];
         // show Investments table (accending order by investor name)
         StringBuilder builder = new StringBuilder();
-        String query = "SELECT * FROM Investments WHERE CryptoId = " + cryptoID + " ORDER BY name ASC";
+        String query = "SELECT y.Name, SUM(x.NumShares) AS 'Total Shares' FROM Investments x, Investor y WHERE x.CryptocurrencyId = "
+                + cryptoID
+                + " GROUP BY y.Name ORDER BY name ASC";
         builder.append("<br> Investors Table :" + cryptoDB.query(query) + "<br>");
         System.out.println(builder.toString());
     }
